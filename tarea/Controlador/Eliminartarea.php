@@ -8,5 +8,6 @@ if(isset($_GET['pkid_tarea'])){
     $mensaje = $consultas->eliminartarea($id);
     echo $mensaje;
     echo "eliminado correctamente";
+    header("location: ../index.php");
 }
 ?>
