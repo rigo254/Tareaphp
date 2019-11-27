@@ -22,7 +22,7 @@
             
         }
         
-        public function cargartarea(){
+        public function cargarTareas(){
             $row = null;
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();
@@ -30,11 +30,7 @@
             $sql = "SELECT * FROM tbl_tarea";//se hace consulta
             $statement = $conexion->prepare($sql);//preparar la consulta
             $statement->execute();//ejecutamos el statement
-            //recorrecoremos cada una de las fiklas que nos devuelva cada una de las filas de las cunsulta
-            while($result = $statement->fetch()){
-                $rows[] = $result; 
-            }
-            return $rows;
+            return $statement;
         }
     
         
@@ -49,13 +45,11 @@
             $statement -> bindParam(":nombre",$nombre);
             $statement->execute();//ejecutamos el statement
             //recorrecoremos cada una de las fiklas que nos devuelva cada una de las filas de las cunsulta
-            while($result = $statement->fetch()){
-                $rows[] = $result; 
-            }
-            return $rows;
+            
+            return $statement;
         }
         
-        public function cargartareas($arg_pkid){
+        public function cargartarea($arg_pkid){
             $row = null;
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();

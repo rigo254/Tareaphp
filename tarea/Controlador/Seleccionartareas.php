@@ -3,7 +3,7 @@ function seleccionar(){
     if(isset($_GET['pkid_tarea'])){
 $consultas = new Consultas();
 $PkId = $_GET['pkid_tarea'];
-$filas = $consultas->cargarTareas($PkId);
+$filas = $consultas->cargartarea($PkId);
 
 foreach($filas as $fila){
     echo '
