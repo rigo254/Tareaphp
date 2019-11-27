@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tbl_tarea` (
   `pkid_tarea` int(11) NOT NULL,
-  `nombre_tarea` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `nombre_tarea` varchar(60) COLLATE utf8_spanish2_ci NOT NULL,
   `fecha_tarea` date NOT NULL,
   `hora_tarea` time(6) NOT NULL,
   `descripcion_tarea` text COLLATE utf8_spanish2_ci NOT NULL,
