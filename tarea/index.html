@@ -8,9 +8,10 @@
 		<title>Tareas</title>
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="assets/css/styles.css" />
+		<link rel="stylesheet" href="assets/css/animate.css" />
 	</head>
 	<body>
-		<div class="container">
+		<div class="container" id="menu">
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-3 col-md-4 col-sm-2 mb-2">
 					<input type="checkbox" onclick="listasTareas()" name="Listar" id="Listar" style="display: none;" />
@@ -67,6 +68,32 @@
 		</div>
 
 		<div style="display: none;" id="mostrar">
+			<div id="mostrarVL" style="display: none;">
+				<input type="checkbox" onclick="listasTareas()" name="Listar" id="Listar" style="display: none;" />
+				<label for="Listar" class="cardCustom education">
+					<div class="overlayCustom"></div>
+					<div class="circle">
+						<i class="fas fa-users fa-4x"></i>
+					</div>
+					<p>Volver Atras</p>
+				</label>
+			</div>
+			<div id="mostrarV" style="display: none;">
+				<input
+					type="checkbox"
+					onclick="buscarTareas()"
+					name="buscarT"
+					id="buscarT"
+					style="display: none;"
+				/>
+				<label for="buscarT" class="cardCustom wallet">
+					<div class="overlayCustom"></div>
+					<div class="circle">
+						<i class="fas fa-users fa-4x"></i>
+					</div>
+					<p>Buscar Tareas</p>
+				</label>
+			</div>
 			<table class="table container text-center table-borderless">
 				<thead style="background: lightgray">
 					<tr>
@@ -131,31 +158,60 @@
 			function ocultar() {
 				document.getElementById('mostrar').style.display = 'none';
 				document.getElementById('Buscador').style.display = 'none';
+				document.getElementById('menu').style.display = 'none';
+				document.getElementById('mostrarVL').style.display = 'none';
+				document.getElementById('mostrarV').style.display = 'none';
 			}
-
+			function removerAnimaciones() {
+				document.getElementById('mostrar').classList.remove('animated', 'slideInDown');
+				document.getElementById('mostrar').classList.remove('animated', 'slideOutDown');
+				document.getElementById('Buscador').classList.remove('animated', 'slideInUp');
+				document.getElementById('Buscador').classList.remove('animated', 'slideOutUp');
+				document.getElementById('menu').classList.remove('animated', 'slideInDown');
+				document.getElementById('menu').classList.remove('animated', 'slideOutDown');
+			}
 			function listasTareas() {
 				var checked = document.getElementById('Listar').checked;
-				ocultar();
-				setTimeout(() => {
-					if (checked == true) {
-						document.getElementById('mostrar').style.display = 'block';
-					} else {
+				removerAnimaciones();
+				document.body.style.overflow = 'hidden';
+				if (checked == true) {
+					document.getElementById('menu').classList.add('animated', 'slideOutDown');
+					setTimeout(() => {
 						ocultar();
-					}
-				}, 200);
+					}, 50);
+					document.getElementById('mostrar').classList.add('animated', 'slideInDown');
+					setTimeout(() => {
+						document.getElementById('mostrarVL').style.display = 'block';
+						document.getElementById('mostrar').style.display = 'block';
+					}, 100);
+				} else {
+					document.getElementById('mostrar').classList.add('animated', 'slideOutDown');
+					setTimeout(() => {
+						ocultar();
+					}, 150);
+					document.getElementById('menu').classList.add('animated', 'slideInDown');
+					setTimeout(() => {
+						document.getElementById('menu').style.display = 'block';
+					}, 200);
+				}
+				setTimeout(() => {
+					document.body.style.overflow = 'visible';
+				}, 1000);
 			}
 
 			function buscarTareas() {
 				var checked1 = document.getElementById('buscarT').checked;
-				ocultar();
-				setTimeout(() => {
-					if (checked1 == true) {
-						document.getElementById('mostrar').style.display = 'block';
-						document.getElementById('Buscador').style.display = 'block';
-					} else {
-						ocultar();
-					}
-				}, 200);
+				removerAnimaciones();
+				document.body.style.overflow = 'hidden';
+				if (checked1 == true) {
+					document.getElementById('mostrar').style.display = 'block';
+					document.getElementById('Buscador').style.display = 'block';
+					document.getElementById('mostrarV').style.display = 'none';
+					document.getElementById('menu').style.display = 'none';
+				} else {
+					ocultar();
+					document.getElementById('menu').style.display = 'block';
+				}
 			}
 		</script>
 	</body>
