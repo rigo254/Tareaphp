@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="assets/css/animate.css" />
 	</head>
 	<body>
+		<h1 class="text-center">Tareas</h1>
 		<div class="container mt-3" id="menu">
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-3 col-md-4 col-sm-2 mb-2">
@@ -201,13 +202,28 @@
 				removerAnimaciones();
 				document.body.style.overflow = 'hidden';
 				if (checked1 == true) {
-					document.getElementById('mostrar').style.display = 'block';
-					document.getElementById('mostrarV').style.display = 'block';
-					document.getElementById('menu').style.display = 'none';
+					document.getElementById('menu').classList.add('animated', 'slideOutDown');
+					setTimeout(() => {
+							ocultar();
+					}, 50);
+					document.getElementById('mostrar').classList.add('animated', 'slideInDown');
+					setTimeout(() => {
+						document.getElementById('mostrar').style.display = 'block';
+						document.getElementById('mostrarV').style.display = 'block';
+					}, 100);
 				} else {
-					ocultar();
-					document.getElementById('menu').style.display = 'block';
+					document.getElementById('mostrar').classList.add('animated', 'slideOutDown');
+					setTimeout(() => {
+							ocultar();
+					}, 150);
+					document.getElementById('menu').classList.add('animated', 'slideInDown');
+					setTimeout(() => {
+						document.getElementById('menu').style.display = 'block';
+					}, 200);
 				}
+				setTimeout(() => {
+					document.body.style.overflow = 'visible';
+				}, 1000);
 			}
 		</script>
 	</body>
