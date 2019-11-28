@@ -1,7 +1,7 @@
 <?php
     class Consultas{
 
-        public function insertartarea($arg_Nombre, $arg_fecha, $arg_hora){
+        public function insertarTarea($arg_Nombre, $arg_fecha, $arg_hora){
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();
             $conexion = $modelo->get_conexion();//se guarda la conexion en la variable conexion
@@ -30,11 +30,11 @@
             $sql = "SELECT * FROM tbl_tarea";//se hace consulta
             $statement = $conexion->prepare($sql);//preparar la consulta
             $statement->execute();//ejecutamos el statement
+            
             return $statement;
         }
     
-        
-        public function buscartarea($arg_nombre){
+        public function buscarTareas($arg_nombre){
             $rows = null;
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();
@@ -49,7 +49,7 @@
             return $statement;
         }
         
-        public function cargartarea($arg_pkid){
+        public function cargarTarea($arg_pkid){
             $row = null;
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();
@@ -58,14 +58,11 @@
             $statement = $conexion->prepare($sql);//preparar la consulta
             $statement->bindParam(":pkid",$arg_pkid);
             $statement->execute();//ejecutamos el statement
-            //recorrecoremos cada una de las fiklas que nos devuelva cada una de las filas de las cunsulta
-            while($result = $statement->fetch()){
-                $rows[] = $result; 
-            }
-            return $rows;
+
+            return $statement;
         }
 
-        public function eliminartarea($arg_id_tarea){
+        public function eliminarTarea($arg_id_tarea){
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();
             $conexion = $modelo->get_conexion();//se guarda la conexion en la variable conexion
@@ -81,11 +78,11 @@
         }
     
         
-        public function modificartarea($arg_campo, $arg_nombre, $arg_id){
+        public function actualizarTarea($arg_nombre, $arg_id){
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();
             $conexion = $modelo->get_conexion();//se guarda la conexion en la variable conexion
-            $sql = "update tbl_tarea set $arg_campo = :nombre where pkid_tarea = :idconsul";
+            $sql = "UPDATE tbl_tarea SET nombre_tarea=:nombre WHERE pkid_tarea=:idconsul";
             $statement = $conexion->prepare($sql);
             $statement->bindParam(":nombre", $arg_nombre);
             $statement->bindParam(":idconsul",$arg_id);
@@ -95,20 +92,6 @@
                 $statement->execute();
                 return "Modificado exitosamente";
             }
-        }
-
-        public function haytareas() {
-            $modelo = new Conexion();
-            $conexion = $modelo->get_conexion();//se guarda la conexion en la variable conexion
-            $sql = "SELECT * FROM tbl_tarea";//se hace consulta
-            $statement = $conexion->prepare($sql);//preparar la consulta
-            $statement->execute();
-            $contador = $statement->fetchALL(PDO::FETCH_OBJ);
-            $cont = 0;
-            foreach ($contador as $conta) {
-                $cont++;
-            }
-            return $cont;
         }
     }
 ?>

@@ -4,27 +4,21 @@
 
     $json = array();
     $consultas = new Consultas();
-    $search = $_POST['buscar'];
-    $rows = $consultas -> buscarTareas($search);//recibe todas las filas de la consulta 
-    $cont = 0;
+    $id = $_POST['id'];
+    $rows = $consultas -> cargarTarea($id);//recibe todas las filas de la consulta 
+
     while($row = $rows->fetch()){
-        $cont++;
         $json[] = array(
             'nombre' => $row['nombre_tarea'],
             'fecha' => $row['fecha_tarea'],
             'hora' =>$row['hora_tarea'],
             'descripcion' => $row['descripcion_tarea'],
             'estado' => $row['estado'],
-            'id' => $row['pkid_tarea'],
-            'type' => 'full'
+            'id' => $row['pkid_tarea']
         );
     }
-    if($cont == 0){
-        $json[] = array(
-            'type' => 'error'
-        );
-    }
-    $jsonstring = json_encode($json);
+
+    $jsonstring = json_encode($json[0]);
     echo $jsonstring;
 
 ?>

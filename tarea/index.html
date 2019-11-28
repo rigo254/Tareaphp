@@ -120,22 +120,23 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<i class="fas fa-times-circle"></i>
 						</button>
-						<h2 class="text-center mb-4">Agregar Tarea</h2>
+						<h2 class="modal-title text-center mb-4">Agregar Tarea</h2>
 						<form id="FrmTarea">
+							<input type="hidden" id="idTarea">
 							<div class="form-group">
-								<input name="nombre" class="form-control" placeholder="Nombre Tarea" required />
+								<input id="nombre" class="form-control" placeholder="Nombre Tarea" required />
 							</div>
 							<div class="form-group">
 								<label class="col-md-6 text-left">Fecha de tarea</label>
-								<input name="fecha" type="date" class="form-control" required />
+								<input id="fecha" type="date" class="form-control" required />
 							</div>
 							<div class="form-group">
 								<label class="col-md-6 text-left">Hora de la tarea</label>
-								<input name="hora" type="time" class="form-control" required />
+								<input id="hora" type="time" class="form-control" required />
 							</div>
 							<div>
 								<center>
-									<button type="submit" class="btn btn-primary">Agregar</button>
+									<button id="btnEnviar" type="submit" class="btn btn-primary">Agregar Tarea</button>
 								</center>
 							</div>
 						</form>
@@ -155,6 +156,10 @@
 				document.getElementById('menu').style.display = 'none';
 				document.getElementById('mostrarVL').style.display = 'none';
 				document.getElementById('mostrarV').style.display = 'none';
+				$('.modal-title').text('Agregar Tarea');
+				$('#btnEnviar').text('Agregar Tarea');
+				document.getElementById('FrmTarea').reset();
+				edit = false;
 			}
 			function removerAnimaciones() {
 				document.getElementById('mostrar').classList.remove('animated', 'slideInDown');

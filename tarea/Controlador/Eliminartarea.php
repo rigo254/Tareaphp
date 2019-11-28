@@ -5,8 +5,7 @@
     if(isset($_POST['id'])){
         $id = $_POST['id'];
         $consultas = new Consultas();
-        $mensaje = $consultas->eliminartarea($id);
-        echo $mensaje;
+        $mensaje = $consultas->eliminarTarea($id);
         echo "full";
     }
 ?>

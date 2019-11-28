@@ -11,7 +11,7 @@
 
     if(strlen($nombre) > 0 && strlen($fecha) > 0 && strlen($hora) > 0 ){
         $consultas = new Consultas();//se crea un objeto de la clase consulta
-        $mensaje = $consultas ->insertartarea($nombre, $fecha, $hora);//pasamos el resultado de la consulta
+        $mensaje = $consultas ->insertarTarea($nombre, $fecha, $hora);//pasamos el resultado de la consulta
         echo "full";
     }else{
         echo "error";
