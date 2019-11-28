@@ -1,16 +1,17 @@
 <?php
     class Consultas{
 
-        public function insertarTarea($arg_Nombre, $arg_fecha, $arg_hora){
+        public function insertarTarea($arg_Nombre, $arg_fecha, $arg_hora, $arg_descripcion){
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();
             $conexion = $modelo->get_conexion();//se guarda la conexion en la variable conexion
-            $sql = "insert into  tbl_tarea(nombre_tarea,fecha_tarea,hora_tarea) values(:nombre, :fecha, :hora)";//se hace la consulta
+            $sql = "insert into  tbl_tarea( nombre_tarea, fecha_tarea, hora_tarea, descripcion_tarea ) values(:nombre, :fecha, :hora, :descripcion)";//se hace la consulta
             $statement = $conexion->prepare($sql);//preparar la consulta
             //se pasan con binparam para evitar el sqlinyeccion
             $statement ->bindParam(':nombre',$arg_Nombre);
             $statement ->bindParam(':fecha',$arg_fecha);
             $statement ->bindParam(':hora',$arg_hora);
+            $statement ->bindParam(':descripcion',$arg_descripcion);
         
             //mira si el statement esta vacio si esta vacio manda un error y si no lo ejecuta
             if(!$statement){
@@ -77,15 +78,32 @@
             }
         }
     
-        
-        public function actualizarTarea($arg_nombre, $arg_id){
+        public function actualizarTarea($arg_id, $arg_Nombre, $arg_fecha, $arg_hora, $arg_descripcion){
             //se crea un objeto de de la clase conexion
             $modelo = new Conexion();
             $conexion = $modelo->get_conexion();//se guarda la conexion en la variable conexion
-            $sql = "UPDATE tbl_tarea SET nombre_tarea=:nombre WHERE pkid_tarea=:idconsul";
+            $sql = "update tbl_tarea set nombre_tarea=:nombre, fecha_tarea=:fecha, hora_tarea=:hora, descripcion_tarea=:descripcion where pkid_tarea=:id";
             $statement = $conexion->prepare($sql);
-            $statement->bindParam(":nombre", $arg_nombre);
-            $statement->bindParam(":idconsul",$arg_id);
+            $statement ->bindParam(':nombre',$arg_Nombre);
+            $statement ->bindParam(':fecha',$arg_fecha);
+            $statement ->bindParam(':hora',$arg_hora);
+            $statement ->bindParam(':descripcion',$arg_descripcion);
+            $statement->bindParam(":id",$arg_id);
+            if(!$statement){
+                return "error al modificar";
+            }else{
+                $statement->execute();
+                return "Modificado exitosamente";
+            }
+        }
+
+        public function tareaCompletada($arg_id){
+            //se crea un objeto de de la clase conexion
+            $modelo = new Conexion();
+            $conexion = $modelo->get_conexion();//se guarda la conexion en la variable conexion
+            $sql = "UPDATE tbl_tarea SET estado='Completado' WHERE  pkid_tarea=:id";
+            $statement = $conexion->prepare($sql);
+            $statement->bindParam(":id",$arg_id);
             if(!$statement){
                 return "error al modificar";
             }else{

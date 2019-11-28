@@ -8,6 +8,16 @@
 	transition-duration: 0.3s;
 }
 
+.task-comple {
+	text-decoration: none !important;
+	margin: 0px;
+	padding: 0px;
+	font-size: 1.5em;
+	color: rgb(45, 230, 153) !important;
+	transition: all;
+	transition-duration: 0.3s;
+}
+
 .task-edit {
 	text-decoration: none !important;
 	margin: 0px;
@@ -21,6 +31,11 @@
 .task-delete:hover {
 	font-size: 1.6em;
 	color: rgb(195, 11, 11) !important;
+}
+
+.task-comple:hover {
+	font-size: 1.6em;
+	color: rgb(6, 209, 141) !important;
 }
 
 .task-edit:hover {
