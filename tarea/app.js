@@ -50,35 +50,9 @@ $(document).ready(function() {
 	});
 
 	$(document).on('click', '.task-delete', (e) => {
-		var elemento = document.getElementsByClassName('task-delete');
-		var id = elemento[0].getAttribute('id');
-		console.log(elemento, id);
-		Swal.fire({
-			title: 'Eliminar?',
-			text: 'Deseas eliminar esta tarea?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			cancelButtonText: 'Cancelar',
-			confirmButtonText: 'Si, Borralo',
-		}).then((result) => {
-			if (result.value) {
-				url = 'Controlador/Eliminartarea.php';
-				$.post(url, { id }, (response) => {
-					if (response == 'exito') {
-						Swal.fire({
-							title: 'Eliminado',
-							text: 'Se ha borrado la tarea con éxito',
-							icon: 'success',
-							showConfirmButton: false,
-							timer: 1200,
-						});
-					}
-					ListarTareas();
-				});
-			}
-		});
+		const element = $(this)[0].activeElement.parentElement.parentElement;
+		const id = $(element).attr('tareaId');
+		console.log(id);
 	});
 
 	$('#buscar').keyup(function() {
@@ -94,7 +68,7 @@ $(document).ready(function() {
 				Tareas.forEach((tarea) => {
 					if (tarea.type == 'full') {
 						template += `
-							<tr>
+							<tr tareaId="${tarea.id}>
 								<td>${tarea.nombre}</td>
 								<td>${tarea.fecha}</td>
 								<td>${tarea.hora}</td>
@@ -106,7 +80,7 @@ $(document).ready(function() {
 											<i class = "fas fa-edit"> </i>
 										</span>
 									</a>
-									<a  id="${tarea.id}"class="task-delete" data-toggle="tooltip" data-place="bottom" title="Eliminar Tarea">
+									<a "class="task-delete" data-toggle="tooltip" data-place="bottom" title="Eliminar Tarea">
 										<span style = "font-size: 1.5em; color: red; ">
 											<i class = "fas fa-trash-alt"> </i>
 										</span>
@@ -136,7 +110,7 @@ $(document).ready(function() {
 				Tareas.forEach((tarea) => {
 					if (tarea.type == 'full') {
 						template += `
-							<tr>
+							<tr tareaId="${tarea.id}">
 								<td>${tarea.nombre}</td>
 								<td>${tarea.fecha}</td>
 								<td>${tarea.hora}</td>
@@ -148,7 +122,7 @@ $(document).ready(function() {
 											<i class = "fas fa-edit"> </i>
 										</span>
 									</a>
-									<a  id="${tarea.id}"class="task-delete" data-toggle="tooltip" data-place="bottom" title="Eliminar Tarea">
+									<a class="task-delete">
 										<span style = "font-size: 1.5em; color: red; ">
 											<i class = "fas fa-trash-alt"> </i>
 										</span>

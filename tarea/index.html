@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="assets/css/animate.css" />
 	</head>
 	<body>
-		<div class="container" id="menu">
+		<div class="container mt-3" id="menu">
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-3 col-md-4 col-sm-2 mb-2">
 					<input type="checkbox" onclick="listasTareas()" name="Listar" id="Listar" style="display: none;" />
@@ -51,48 +51,43 @@
 			</div>
 		</div>
 
-		<div id="Buscador" style="display: none !important;">
-			<form class="form-inline d-flex justify-content-center mb-4">
-				<input
-					name="search"
-					id="buscar"
-					class="form-control mr-sm-2"
-					type="search"
-					placeholder="Buscar Tarea"
-					aria-label="Search"
-				/>
-				<span style="font-size: 1.6em; color:#ceb2fc;">
-					<i class="fas fa-search"></i>
-				</span>
-			</form>
-		</div>
-
 		<div style="display: none;" id="mostrar">
-			<div id="mostrarVL" style="display: none;">
-				<input type="checkbox" onclick="listasTareas()" name="Listar" id="Listar" style="display: none;" />
-				<label for="Listar" class="cardCustom education">
-					<div class="overlayCustom"></div>
-					<div class="circle">
-						<i class="fas fa-users fa-4x"></i>
+			<div class="d-flex justify-content-center mt-3">
+				<div id="mostrarVL" style="display: none;">
+					<input type="checkbox" onclick="listasTareas()" name="Listar" id="Listar" style="display: none;" />
+					<label for="Listar" class="btnVolver education">
+						<div class="overlayVolver"></div>
+						<div class="circleVolver">
+							<i class="fas fa-arrow-left fa-3x"></i>
+						</div>
+						<p>Volver Atras</p>
+					</label>
+				</div>
+				<div id="mostrarV" style="display: none;">
+					<div class="d-flex justify-content-center">
+						<input type="checkbox" onclick="buscarTareas()" name="buscarT" id="buscarT" style="display: none;"/>
+						<label for="buscarT" class="btnVolver wallet">
+							<div class="overlayVolver"></div>
+							<div class="circleVolver">
+								<i class="fas fa-arrow-left fa-3x"></i>
+							</div>
+							<p>Volver Atras</p>
+						</label>
 					</div>
-					<p>Volver Atras</p>
-				</label>
-			</div>
-			<div id="mostrarV" style="display: none;">
-				<input
-					type="checkbox"
-					onclick="buscarTareas()"
-					name="buscarT"
-					id="buscarT"
-					style="display: none;"
-				/>
-				<label for="buscarT" class="cardCustom wallet">
-					<div class="overlayCustom"></div>
-					<div class="circle">
-						<i class="fas fa-users fa-4x"></i>
+					<div class="form-inline mb-4">
+						<input
+							name="search"
+							id="buscar"
+							class="form-control mr-sm-2"
+							type="search"
+							placeholder="Buscar Tarea"
+							aria-label="Search"
+						/>
+						<label for="buscar" style="font-size: 1.6em; color:#ceb2fc;">
+							<i class="fas fa-search"></i>
+						</label for="buscar">
 					</div>
-					<p>Buscar Tareas</p>
-				</label>
+				</div>
 			</div>
 			<table class="table container text-center table-borderless">
 				<thead style="background: lightgray">
@@ -157,7 +152,6 @@
 		<script>
 			function ocultar() {
 				document.getElementById('mostrar').style.display = 'none';
-				document.getElementById('Buscador').style.display = 'none';
 				document.getElementById('menu').style.display = 'none';
 				document.getElementById('mostrarVL').style.display = 'none';
 				document.getElementById('mostrarV').style.display = 'none';
@@ -165,8 +159,6 @@
 			function removerAnimaciones() {
 				document.getElementById('mostrar').classList.remove('animated', 'slideInDown');
 				document.getElementById('mostrar').classList.remove('animated', 'slideOutDown');
-				document.getElementById('Buscador').classList.remove('animated', 'slideInUp');
-				document.getElementById('Buscador').classList.remove('animated', 'slideOutUp');
 				document.getElementById('menu').classList.remove('animated', 'slideInDown');
 				document.getElementById('menu').classList.remove('animated', 'slideOutDown');
 			}
@@ -205,8 +197,7 @@
 				document.body.style.overflow = 'hidden';
 				if (checked1 == true) {
 					document.getElementById('mostrar').style.display = 'block';
-					document.getElementById('Buscador').style.display = 'block';
-					document.getElementById('mostrarV').style.display = 'none';
+					document.getElementById('mostrarV').style.display = 'block';
 					document.getElementById('menu').style.display = 'none';
 				} else {
 					ocultar();
